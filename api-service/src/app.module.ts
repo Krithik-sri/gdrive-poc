@@ -8,13 +8,15 @@ import { User } from './user/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { FileModule } from './file/file.module';
 import { File } from './file/file.entity';
+import { TeamsModule } from './teams/teams.module';
+import { Team } from './teams/team.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: process.env.DB_PATH || 'db.sqlite',
-      entities: [User, File],
+      entities: [User, File, Team],
       synchronize: true, // Auto create schema, fine for POC
     }),
     BullModule.forRoot({
@@ -26,6 +28,7 @@ import { File } from './file/file.entity';
     UserModule,
     AuthModule,
     FileModule,
+    TeamsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

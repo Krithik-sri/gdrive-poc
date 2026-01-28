@@ -1,6 +1,7 @@
 
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { File } from '../file/file.entity';
+import { Team } from '../teams/team.entity';
 
 @Entity()
 export class User {
@@ -25,6 +26,15 @@ export class User {
     @Column({ nullable: true })
     refreshToken: string;
 
+    @Column({ nullable: true })
+    microsoftAccessToken: string;
+
+    @Column({ nullable: true })
+    microsoftRefreshToken: string;
+
     @OneToMany(() => File, (file) => file.user)
     files: File[];
+
+    @OneToMany(() => Team, (team) => team.user)
+    teams: Team[];
 }

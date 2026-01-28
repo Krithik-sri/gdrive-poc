@@ -4,6 +4,7 @@ import { HttpModule } from '@nestjs/axios';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DriveProcessor } from './drive/drive.processor';
+import { TeamsProcessor } from './teams/teams.processor';
 
 @Module({
   imports: [
@@ -16,9 +17,12 @@ import { DriveProcessor } from './drive/drive.processor';
     BullModule.registerQueue({
       name: 'drive-queue',
     }),
+    BullModule.registerQueue({
+      name: 'teams-queue',
+    }),
     HttpModule,
   ],
   controllers: [AppController],
-  providers: [AppService, DriveProcessor],
+  providers: [AppService, DriveProcessor, TeamsProcessor],
 })
 export class AppModule { }

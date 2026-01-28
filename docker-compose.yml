@@ -13,6 +13,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+      - "3003:3000"
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -20,6 +21,10 @@ services:
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
       - GOOGLE_CALLBACK_URL=http://localhost:3000/auth/google/callback
+      - MICROSOFT_CLIENT_ID=${MICROSOFT_CLIENT_ID}
+      - MICROSOFT_CLIENT_SECRET=${MICROSOFT_CLIENT_SECRET}
+      - MICROSOFT_REDIRECT_URL=${MICROSOFT_REDIRECT_URL}
+      - MICROSOFT_TENANT_ID=${MICROSOFT_TENANT_ID}
     volumes:
       - ./data:/app/data
     depends_on:
@@ -35,6 +40,8 @@ services:
       - API_SERVICE_URL=http://api-service:3000
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - MICROSOFT_CLIENT_ID=${MICROSOFT_CLIENT_ID}
+      - MICROSOFT_CLIENT_SECRET=${MICROSOFT_CLIENT_SECRET}
     depends_on:
       - redis
       - api-service
